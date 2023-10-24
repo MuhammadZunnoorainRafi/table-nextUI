@@ -1,6 +1,8 @@
 import NextUiTable from '@/components/NextUiTable';
 
-export default function Home() {
+export default async function Home() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  const data = await res.json();
   return (
     <div className="max-w-4xl mt-14 mx-auto space-y-10">
       <div className="font-mono text-xl font-bold tracking-wider text-center  bg-black text-slate-100">
@@ -8,7 +10,7 @@ export default function Home() {
           Table Next-UI
         </h1>
       </div>
-      <NextUiTable />
+      <NextUiTable users={data} />
     </div>
   );
 }
