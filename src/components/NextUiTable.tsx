@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   Table,
@@ -9,32 +10,41 @@ import {
   getKeyValue,
 } from '@nextui-org/react';
 
-const rows = [
-  {
-    key: '1',
-    name: 'Tony Reichert',
-    role: 'CEO',
-    status: 'Active',
-  },
-  {
-    key: '2',
-    name: 'Zoey Lang',
-    role: 'Technical Lead',
-    status: 'Paused',
-  },
-  {
-    key: '3',
-    name: 'Jane Fisher',
-    role: 'Senior Developer',
-    status: 'Active',
-  },
-  {
-    key: '4',
-    name: 'William Howard',
-    role: 'Community Manager',
-    status: 'Vacation',
-  },
-];
+type Props = {
+  users: {
+    id: number;
+    name: string;
+    email: string;
+    website: string;
+  }[];
+};
+
+// const rows = [
+//   {
+//     key: '1',
+//     name: 'Tony Reichert',
+//     role: 'CEO',
+//     status: 'Active',
+//   },
+//   {
+//     key: '2',
+//     name: 'Zoey Lang',
+//     role: 'Technical Lead',
+//     status: 'Paused',
+//   },
+//   {
+//     key: '3',
+//     name: 'Jane Fisher',
+//     role: 'Senior Developer',
+//     status: 'Active',
+//   },
+//   {
+//     key: '4',
+//     name: 'William Howard',
+//     role: 'Community Manager',
+//     status: 'Vacation',
+//   },
+// ];
 
 const columns = [
   {
@@ -42,24 +52,24 @@ const columns = [
     label: 'NAME',
   },
   {
-    key: 'role',
-    label: 'ROLE',
+    key: 'email',
+    label: 'EMAIL',
   },
   {
-    key: 'status',
-    label: 'STATUS',
+    key: 'website',
+    label: 'WEBSITE',
   },
 ];
 
-export default function NextUiTable() {
+export default function NextUiTable({ users }: Props) {
   return (
     <Table aria-label="Example table with dynamic content">
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>
-      <TableBody items={rows}>
+      <TableBody items={users}>
         {(item) => (
-          <TableRow key={item.key}>
+          <TableRow key={item.id}>
             {(columnKey) => (
               <TableCell>{getKeyValue(item, columnKey)}</TableCell>
             )}
